@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -145,7 +145,7 @@ export default function Incidents() {
       <section className="incident-overview">
         <div>
           <span className="eyebrow">Smart Incident Reporting</span>
-          <h2>Fiber Risk Command Center</h2>
+          <h2>Live Monitoring</h2>
           <p>
             Track incidents from Threat reporting through assessment, avoidance
             validation, action planning and implementation.
@@ -369,4 +369,5 @@ export default function Incidents() {
     </>
   );
 }
+
 
