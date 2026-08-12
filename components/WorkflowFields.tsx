@@ -13,8 +13,8 @@ export default function WorkflowFields({ value, onChange }: { value: WorkflowVal
       <div className="field"><label>Stage *</label><select className="select" value={value.stage} onChange={e=>setStage(e.target.value as IncidentStage)}>{INCIDENT_STAGES.map(x=><option key={x}>{x}</option>)}</select></div>
       <div className="field"><label>Sub-stage *</label><select className="select" value={value.subStage} onChange={e=>onChange({...value,subStage:e.target.value as IncidentSubStage})}>{subs.map(x=><option key={x}>{x}</option>)}</select></div>
       {value.stage === "Action Plan" && <div className="field full"><label>Action Plan *</label><select className="select" value={value.actionPlan ?? ""} onChange={e=>onChange({...value,actionPlan:(e.target.value||null) as ActionPlanOption|null})}><option value="">Select Action Plan</option>{ACTION_PLAN_FORMULATION_OPTIONS.map(x=><option key={x}>{x}</option>)}</select></div>}
-      <div className="field full"><label>Threat</label><textarea className="textarea" maxLength={2000} value={value.threatDetails} onChange={e=>onChange({...value,threatDetails:e.target.value})} placeholder="Describe the threat, exposure or risk…" /></div>
-      <div className="field full"><label>Action Plan Details</label><textarea className="textarea" maxLength={2000} value={value.actionPlanDetails} onChange={e=>onChange({...value,actionPlanDetails:e.target.value})} placeholder="Add action plan execution details…" /></div>
+      <div className="field full"><label>Threat</label><textarea className="textarea" maxLength={2000} value={value.threatDetails} onChange={e=>onChange({...value,threatDetails:e.target.value})} placeholder="Describe the threat, exposure or risk..." /></div>
+      <div className="field full"><label>Action Plan Details</label><textarea className="textarea" maxLength={2000} value={value.actionPlanDetails} onChange={e=>onChange({...value,actionPlanDetails:e.target.value})} placeholder="Add action plan execution details..." /></div>
     </div>
   </div>;
 }

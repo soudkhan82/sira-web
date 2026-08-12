@@ -22,12 +22,12 @@ export default function LocationPicker({ value, onChange, autoGps = true }: { va
     if (!("geolocation" in navigator)) {
       setGpsState("error"); setGpsMessage("This browser does not expose geolocation. Use SubRegion/District or drop the pin."); return;
     }
-    setGpsState("loading"); setGpsMessage("Requesting current location…");
+    setGpsState("loading"); setGpsMessage("Requesting current location...");
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const p = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
         const area = inferSiraArea(p);
-        onChange(p, area ? `${area.subRegion} • ${area.name}` : "Current location");
+        onChange(p, area ? `${area.subRegion} - ${area.name}` : "Current location");
         setSubRegion(area?.subRegion ?? ""); setDistrict(area?.name ?? "");
         setGpsState("ok"); setGpsMessage(`Location received (accuracy about ${Math.round(pos.coords.accuracy)} m). You can still move the pin.`);
       },
@@ -51,7 +51,7 @@ export default function LocationPicker({ value, onChange, autoGps = true }: { va
   function selectDistrict(name: string) {
     setMode("area"); setDistrict(name);
     const d = districts.find(x => x.name === name);
-    if (d) onChange({ latitude: d.latitude, longitude: d.longitude }, `${d.subRegion} • ${d.name}`);
+    if (d) onChange({ latitude: d.latitude, longitude: d.longitude }, `${d.subRegion} - ${d.name}`);
   }
 
   return <div className="card map-card">
@@ -63,8 +63,8 @@ export default function LocationPicker({ value, onChange, autoGps = true }: { va
         <button type="button" className="btn" onClick={()=>setMode("pin")}>Enable manual pin</button>
       </div>
       {gpsMessage && <div className={gpsState==="error"?"location-note gps-error":gpsState==="ok"?"location-note gps-ok":"location-note"}>{gpsMessage}</div>}
-      <div className="location-note"><b>Selected:</b> {value.latitude.toFixed(5)}, {value.longitude.toFixed(5)}{inferred ? ` • ${inferred.subRegion} • ${inferred.name}` : ""}</div>
+      <div className="location-note"><b>Selected:</b> {value.latitude.toFixed(5)}, {value.longitude.toFixed(5)}{inferred ? ` - ${inferred.subRegion} - ${inferred.name}` : ""}</div>
     </div>
-    <LeafletMap center={value} zoom={mode==="area" && !district ? 8 : 13} selected={value} interactivePin={mode==="pin" || mode==="gps"} onPinChange={(p)=>{setMode("pin"); const a=inferSiraArea(p); setSubRegion(a?.subRegion??""); setDistrict(a?.name??""); onChange(p,a?`${a.subRegion} • ${a.name}`:"Manual pin");}} compact />
+    <LeafletMap center={value} zoom={mode==="area" && !district ? 8 : 13} selected={value} interactivePin={mode==="pin" || mode==="gps"} onPinChange={(p)=>{setMode("pin"); const a=inferSiraArea(p); setSubRegion(a?.subRegion??""); setDistrict(a?.name??""); onChange(p,a?`${a.subRegion} - ${a.name}`:"Manual pin");}} compact />
   </div>;
 }

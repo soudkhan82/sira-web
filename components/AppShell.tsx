@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
+import IncidentDetailsHost from "@/components/IncidentDetailsHost";
 
 const nav = [
-  ["/map", "Map", "⌖"],
+  ["/map", "Map", ""],
   ["/dashboard", "Dashboard", "▦"],
   ["/incidents", "Incidents", "☷"],
   ["/report", "Report", "+"],
   ["/alerts", "Alerts", "◉"],
-  ["/more", "More", "•••"],
+  ["/more", "More", " - - - "],
 ] as const;
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -46,6 +47,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
       <main className="main-content">{children}</main>
+      <Suspense fallback={null}>
+        <IncidentDetailsHost />
+      </Suspense>
+
       <nav className="mobile-nav">
         {nav.map(([href, label, icon]) => <Link key={href} href={href} className={pathname === href ? "active" : ""}><span>{icon}</span><small>{label}</small></Link>)}
       </nav>
