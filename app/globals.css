@@ -2864,3 +2864,159 @@ body {
 }
 
 /* SIRA INCIDENT DETAILS MODAL END */
+
+
+/* SIRA WORKFLOW HISTORY DETAILS START */
+
+.sira-modal-history {
+  display: grid;
+  gap: 0;
+}
+
+.sira-history-row {
+  display: block !important;
+
+  padding: 15px 0 !important;
+
+  border-bottom:
+    1px solid #e7eef5;
+}
+
+.sira-history-row:last-child {
+  border-bottom: 0;
+}
+
+.sira-history-content {
+  width: 100%;
+
+  min-width: 0;
+}
+
+.sira-history-heading {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.sira-history-heading > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.sira-history-heading strong {
+  color: #234666;
+
+  font-size: 12px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+}
+
+.sira-history-user {
+  color: #7d8fa1 !important;
+
+  font-size: 10.5px !important;
+
+  line-height: 1.4;
+
+  font-weight: 400 !important;
+}
+
+.sira-history-heading time {
+  flex: 0 0 auto;
+
+  color: #8091a3;
+
+  font-size: 10.5px;
+
+  line-height: 1.4;
+
+  font-weight: 400;
+}
+
+.sira-history-detail-block {
+  margin-top: 11px;
+
+  padding: 10px 12px;
+
+  border-left:
+    3px solid #5c9ce6;
+
+  border-radius:
+    0 8px 8px 0;
+
+  background:
+    #f7faff;
+}
+
+.sira-history-detail-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #75899d !important;
+
+  font-size: 9px !important;
+
+  line-height: 1.2;
+
+  font-weight: 700 !important;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.sira-history-detail-block p {
+  margin: 0;
+
+  color: #36536e;
+
+  font-size: 11.5px;
+
+  line-height: 1.55;
+
+  font-weight: 400;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+}
+
+.sira-history-no-detail {
+  margin: 8px 0 0;
+
+  color: #98a5b2;
+
+  font-size: 10.5px;
+
+  line-height: 1.4;
+
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+
+  .sira-history-heading {
+    gap: 10px;
+  }
+
+  .sira-history-heading time {
+    font-size: 9.5px;
+  }
+
+  .sira-history-detail-block {
+    padding: 9px 10px;
+  }
+}
+
+/* SIRA WORKFLOW HISTORY DETAILS END */

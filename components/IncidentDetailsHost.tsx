@@ -652,31 +652,87 @@ export default function IncidentDetailsHost() {
 
                 {history.length ? (
                   <div className="sira-modal-history">
-                    {history.map((item) => (
-                      <div
-                        className="sira-history-row"
-                        key={item.id}
-                      >
-                        <div>
-                          <strong>
-                            {item.stage +
-                              " - " +
-                              item.sub_stage}
-                          </strong>
+                    {history.map((item) => {
+                      const isThreatStage =
+                        item.stage === "Threat";
 
-                          <span>
-                            {item.changed_by_username ||
-                              "SIRA user"}
-                          </span>
+                      const isActionPlanStage =
+                        item.stage === "Action Plan";
+
+                      const stageDetails =
+                        isThreatStage
+                          ? item.threat_details
+                          : isActionPlanStage
+                            ? item.action_plan_details
+                            : null;
+
+                      return (
+                        <div
+                          className="sira-history-row"
+                          key={item.id}
+                        >
+                          <div className="sira-history-content">
+                            <div className="sira-history-heading">
+                              <div>
+                                <strong>
+                                  {item.stage +
+                                    " - " +
+                                    item.sub_stage}
+                                </strong>
+
+                                <span className="sira-history-user">
+                                  {item.changed_by_username ||
+                                    "SIRA user"}
+                                </span>
+                              </div>
+
+                              <time>
+                                {formatDateShort(
+                                  item.changed_at
+                                )}
+                              </time>
+                            </div>
+
+                            {isActionPlanStage &&
+                              item.action_plan && (
+                                <div className="sira-history-detail-block">
+                                  <span className="sira-history-detail-label">
+                                    Action Plan
+                                  </span>
+
+                                  <p>
+                                    {item.action_plan}
+                                  </p>
+                                </div>
+                              )}
+
+                            {stageDetails && (
+                              <div className="sira-history-detail-block">
+                                <span className="sira-history-detail-label">
+                                  {isThreatStage
+                                    ? "Threat Details"
+                                    : "Stage Details"}
+                                </span>
+
+                                <p>
+                                  {stageDetails}
+                                </p>
+                              </div>
+                            )}
+
+                            {!stageDetails &&
+                              !(
+                                isActionPlanStage &&
+                                item.action_plan
+                              ) && (
+                                <p className="sira-history-no-detail">
+                                  No additional stage details were recorded.
+                                </p>
+                              )}
+                          </div>
                         </div>
-
-                        <time>
-                          {formatDateShort(
-                            item.changed_at
-                          )}
-                        </time>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : (
                   <p className="sira-detail-copy">
