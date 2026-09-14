@@ -3455,141 +3455,145 @@ body {
 
 /* SIRA MAP-FIRST DRAWER PATCH END */
 
-/* SIRA INCIDENT TABLE LAYOUT RESET START */
+/* SIRA COMPACT INCIDENT TABLE PATCH START */
 
-/* This block intentionally comes last.
-   It clears the grid-area names left behind by the former
-   horizontal-card layout, then defines one clean six-column table. */
+/* =========================================================
+   COMPACT OPERATIONAL TABLE
+   Replaces the horizontal incident cards on both Dashboard
+   and Incidents while preserving row selection + map logic.
+   ========================================================= */
+
+.sira-incident-table-head {
+  display: grid;
+  grid-template-columns:
+    minmax(82px, .62fr)
+    minmax(190px, 1.55fr)
+    minmax(120px, .92fr)
+    minmax(130px, .95fr)
+    minmax(92px, .68fr)
+    minmax(58px, .36fr);
+  gap: 10px;
+  align-items: center;
+
+  padding: 9px 12px;
+
+  border: 1px solid #d7e3ef;
+  border-bottom: 1px solid #e5edf5;
+  border-radius: 13px 13px 0 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(250, 253, 255, .98),
+      rgba(246, 250, 254, .96)
+    );
+
+  color: #8091a3;
+
+  font-size: 9px;
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+.sira-incident-table-head span:last-child {
+  text-align: right;
+}
 
 .incident-grid,
 .dashboard-incident-list {
   display: block !important;
+
   width: 100% !important;
   max-width: 100% !important;
-  max-height: clamp(430px, 55vh, 660px) !important;
+
+  max-height: clamp(460px, 56vh, 690px) !important;
+
   padding: 0 !important;
+
   overflow-x: hidden !important;
   overflow-y: auto !important;
+
   border: 1px solid #d7e3ef !important;
-  border-radius: 13px !important;
-  background: #ffffff !important;
-  box-shadow: 0 10px 28px rgba(30, 65, 108, .06) !important;
+  border-top: 0 !important;
+  border-radius: 0 0 13px 13px !important;
+
+  background: rgba(255, 255, 255, .94) !important;
+
+  box-shadow:
+    0 10px 28px rgba(30, 65, 108, .06) !important;
+
   scroll-snap-type: none !important;
   scrollbar-width: thin;
   scrollbar-color: #bfd0e0 transparent;
 }
 
 .dashboard-incident-list {
-  max-height: clamp(360px, 43vh, 540px) !important;
+  max-height: clamp(390px, 45vh, 560px) !important;
 }
 
 .incident-grid::-webkit-scrollbar,
 .dashboard-incident-list::-webkit-scrollbar {
-  width: 8px !important;
-  height: 8px !important;
+  width: 8px;
+  height: auto;
 }
 
 .incident-grid::-webkit-scrollbar-track,
 .dashboard-incident-list::-webkit-scrollbar-track {
-  background: transparent !important;
+  background: transparent;
 }
 
 .incident-grid::-webkit-scrollbar-thumb,
 .dashboard-incident-list::-webkit-scrollbar-thumb {
-  background: #bfd0e0 !important;
-  border: 2px solid #ffffff !important;
-  border-radius: 999px !important;
+  background: #c3d3e2;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
 }
 
-/* One shared column definition for header + every row. */
-.sira-incident-table-head,
+
+/* =========================================================
+   TABLE ROW
+   ========================================================= */
+
 .incident-grid > .incident-list-row,
 .dashboard-incident-list > .incident-list-row {
+  display: grid !important;
+
   grid-template-columns:
-    minmax(76px, .62fr)
-    minmax(180px, 1.58fr)
-    minmax(108px, .88fr)
-    minmax(112px, .92fr)
-    minmax(78px, .62fr)
-    minmax(56px, .40fr) !important;
-  column-gap: 8px !important;
-}
+    minmax(82px, .62fr)
+    minmax(190px, 1.55fr)
+    minmax(120px, .92fr)
+    minmax(130px, .95fr)
+    minmax(92px, .68fr)
+    minmax(58px, .36fr) !important;
 
-/* Sticky table header. */
-.incident-grid > .sira-incident-table-head,
-.dashboard-incident-list > .sira-incident-table-head {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 5 !important;
-
-  display: grid !important;
-  align-items: center !important;
-
-  min-height: 38px !important;
-  padding: 8px 10px !important;
-
-  border: 0 !important;
-  border-bottom: 1px solid #dfe8f1 !important;
-  border-radius: 0 !important;
-
-  background: rgba(248, 251, 254, .99) !important;
-  box-shadow: 0 2px 6px rgba(30, 65, 108, .04) !important;
-
-  color: #7b8da0 !important;
-  font-size: 8.5px !important;
-  line-height: 1.15 !important;
-  font-weight: 700 !important;
-  letter-spacing: .055em !important;
-  text-transform: uppercase !important;
-}
-
-.sira-incident-table-head > span {
-  min-width: 0 !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-.sira-incident-table-head > span:last-child {
-  text-align: right !important;
-}
-
-/* Clean row: no card behavior, no named grid areas. */
-.incident-grid > .incident-list-row,
-.dashboard-incident-list > .incident-list-row {
-  display: grid !important;
   grid-template-areas: none !important;
+
+  gap: 10px !important;
+  align-items: center !important;
 
   width: 100% !important;
   min-width: 0 !important;
-  min-height: 62px !important;
+  min-height: 66px !important;
 
-  padding: 8px 10px !important;
+  padding: 9px 12px !important;
 
-  align-items: center !important;
+  overflow: visible !important;
 
   border: 0 !important;
   border-bottom: 1px solid #e8eef5 !important;
   border-radius: 0 !important;
 
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, .92) !important;
+
   box-shadow: none !important;
 
-  transform: none !important;
   scroll-snap-align: none !important;
-}
 
-/* CRITICAL RESET:
-   the old horizontal-card stylesheet assigned named grid areas
-   (primary/workflow/location/date/actions). Clear all of them. */
-.incident-grid > .incident-list-row > *,
-.dashboard-incident-list > .incident-list-row > * {
-  grid-area: auto !important;
-  grid-column: auto !important;
-  grid-row: auto !important;
-  min-width: 0 !important;
-  width: auto !important;
-  max-width: 100% !important;
+  transform: none !important;
 }
 
 .incident-grid > .incident-list-row:last-child,
@@ -3600,7 +3604,8 @@ body {
 .incident-grid > .incident-list-row:hover,
 .dashboard-incident-list > .incident-list-row:hover {
   transform: none !important;
-  background: #f8fbff !important;
+  background: #f7fbff !important;
+  border-color: #e1ebf4 !important;
   box-shadow: none !important;
 }
 
@@ -3609,79 +3614,98 @@ body {
   background:
     linear-gradient(
       90deg,
-      rgba(232, 244, 255, .95) 0%,
-      rgba(249, 252, 255, .98) 70%,
-      #ffffff 100%
+      rgba(232, 244, 255, .98) 0%,
+      rgba(248, 252, 255, .98) 64%,
+      rgba(255, 255, 255, .98) 100%
     ) !important;
 
-  box-shadow: inset 3px 0 0 #2f82e9 !important;
+  border-color: #dbe8f4 !important;
+
+  box-shadow:
+    inset 4px 0 0 #2f82e9 !important;
 }
 
-/* Severity / Status */
+
+/* =========================================================
+   STATUS / SEVERITY COLUMN
+   ========================================================= */
+
 .incident-list-status {
+  min-width: 0;
+
   display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
-  justify-content: center !important;
-  gap: 4px !important;
-  min-width: 0 !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
 }
 
 .incident-list-status .badge {
-  max-width: 100% !important;
   padding: 3px 6px !important;
-  font-size: 9px !important;
-  line-height: 1.1 !important;
-  white-space: nowrap !important;
+
+  font-size: 9.5px !important;
+  line-height: 1.15;
 }
 
-/* Incident / ID */
+
+/* =========================================================
+   INCIDENT COLUMN
+   ========================================================= */
+
 .incident-grid .incident-list-primary,
 .dashboard-incident-list .incident-list-primary {
+  min-width: 0;
   display: block !important;
-  min-width: 0 !important;
 }
 
 .incident-grid .incident-list-title,
 .dashboard-incident-list .incident-list-title {
-  display: block !important;
-  min-width: 0 !important;
+  min-width: 0;
+
+  display: grid !important;
+  gap: 3px !important;
 }
 
 .incident-grid .incident-list-title h3,
 .dashboard-incident-list .incident-list-title h3 {
-  display: block !important;
-  min-width: 0 !important;
-  margin: 0 0 3px !important;
+  min-width: 0;
 
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  margin: 0 !important;
 
-  color: #12283f !important;
-  font-size: 12px !important;
-  line-height: 1.25 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #12283f;
+
+  font-size: 12.5px !important;
+  line-height: 1.3;
+
   font-weight: 700 !important;
 }
 
 .incident-grid .incident-list-title .incident-code,
 .dashboard-incident-list .incident-list-title .incident-code {
-  display: block !important;
-  color: #7f91a3 !important;
-  font-size: 9px !important;
-  line-height: 1.2 !important;
-  font-weight: 650 !important;
+  color: #8191a2;
+
+  font-size: 9.5px;
+  font-weight: 650;
 }
 
-/* Workflow / Location / Reported */
+
+/* =========================================================
+   WORKFLOW / LOCATION / REPORTED
+   ========================================================= */
+
 .incident-grid .incident-list-workflow,
 .incident-grid .incident-list-location,
 .incident-grid .incident-list-date,
 .dashboard-incident-list .incident-list-workflow,
 .dashboard-incident-list .incident-list-location,
 .dashboard-incident-list .incident-list-date {
-  display: block !important;
-  min-width: 0 !important;
+  min-width: 0;
+
+  display: grid !important;
+  gap: 4px !important;
 }
 
 .incident-grid .incident-list-label,
@@ -3691,18 +3715,16 @@ body {
 
 .incident-grid .incident-list-workflow .workflow-chip,
 .dashboard-incident-list .incident-list-workflow .workflow-chip {
-  display: inline-block !important;
-  width: auto !important;
-  max-width: 100% !important;
+  width: max-content;
+  max-width: 100%;
 
-  padding: 4px 6px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  padding: 4px 7px;
 
-  font-size: 9.5px !important;
-  line-height: 1.2 !important;
+  font-size: 10px !important;
   font-weight: 600 !important;
 }
 
@@ -3710,143 +3732,218 @@ body {
 .incident-grid .incident-list-date strong,
 .dashboard-incident-list .incident-list-location strong,
 .dashboard-incident-list .incident-list-date strong {
-  display: block !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
+  min-width: 0;
 
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
-  color: #587089 !important;
-  font-size: 10px !important;
-  line-height: 1.25 !important;
+  color: #587089;
+
+  font-size: 10.5px !important;
+  line-height: 1.3;
+
   font-weight: 500 !important;
 }
 
-/* Action */
+
+/* =========================================================
+   ACTION COLUMN
+   ========================================================= */
+
 .incident-grid .incident-list-actions,
 .dashboard-incident-list .incident-list-actions {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-end !important;
-  justify-content: center !important;
+  min-width: 0;
+
+  display: grid !important;
+  justify-items: end;
+  align-items: center;
+  align-self: center !important;
+
   gap: 4px !important;
-  min-width: 0 !important;
-  text-align: right !important;
+
+  text-align: right;
 }
 
 .incident-grid .incident-map-state,
 .dashboard-incident-list .incident-map-state {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  max-width: 100% !important;
-  color: #8495a7 !important;
-  font-size: 8px !important;
-  line-height: 1.1 !important;
-  font-weight: 650 !important;
-  white-space: nowrap !important;
+  font-size: 8.5px;
 }
 
 .incident-grid .incident-detail-link,
 .dashboard-incident-list .incident-detail-link {
-  display: inline-block !important;
-  color: #1267e8 !important;
-  font-size: 9.5px !important;
-  line-height: 1.15 !important;
+  font-size: 10px !important;
   font-weight: 700 !important;
-  white-space: nowrap !important;
 }
 
-/* Keep map dominant. */
-.incident-workspace,
-.dashboard-command-workspace {
-  grid-template-columns:
-    minmax(0, 47fr)
-    minmax(0, 53fr) !important;
-}
 
-@media (min-width: 1550px) {
-  .incident-workspace,
-  .dashboard-command-workspace {
-    grid-template-columns:
-      minmax(0, 45fr)
-      minmax(0, 55fr) !important;
-  }
-}
+/* =========================================================
+   RESPONSIVE COLUMNS WHILE MAP REMAINS 53-55%
+   ========================================================= */
 
-/* On a narrower split pane, hide Reported first rather than crush text. */
-@media (max-width: 1380px) and (min-width: 1001px) {
+@media (max-width: 1450px) and (min-width: 1001px) {
   .sira-incident-table-head,
   .incident-grid > .incident-list-row,
   .dashboard-incident-list > .incident-list-row {
     grid-template-columns:
-      minmax(72px, .62fr)
-      minmax(170px, 1.58fr)
-      minmax(104px, .88fr)
-      minmax(108px, .92fr)
-      minmax(54px, .40fr) !important;
+      minmax(78px, .62fr)
+      minmax(175px, 1.5fr)
+      minmax(112px, .88fr)
+      minmax(120px, .9fr)
+      minmax(56px, .36fr) !important;
   }
 
-  .sira-incident-table-head > span:nth-child(5),
-  .incident-grid > .incident-list-row > .incident-list-date,
-  .dashboard-incident-list > .incident-list-row > .incident-list-date {
+  .sira-incident-table-head span:nth-child(5),
+  .incident-grid .incident-list-date,
+  .dashboard-incident-list .incident-list-date {
     display: none !important;
   }
 }
 
-/* At tablet width the map stacks below, so the full table can return. */
-@media (max-width: 1000px) {
-  .incident-workspace,
-  .dashboard-command-workspace {
-    grid-template-columns: minmax(0, 1fr) !important;
+@media (max-width: 1180px) and (min-width: 1001px) {
+  .sira-incident-table-head,
+  .incident-grid > .incident-list-row,
+  .dashboard-incident-list > .incident-list-row {
+    grid-template-columns:
+      minmax(74px, .60fr)
+      minmax(175px, 1.52fr)
+      minmax(108px, .86fr)
+      minmax(54px, .34fr) !important;
   }
 
+  .sira-incident-table-head span:nth-child(4),
+  .incident-grid .incident-list-location,
+  .dashboard-incident-list .incident-list-location {
+    display: none !important;
+  }
+}
+
+
+/* Workspace stacks below 1000px from the map-first patch,
+   so restore the full table while there is enough width. */
+
+@media (max-width: 1000px) {
+  .sira-incident-table-head,
+  .incident-grid > .incident-list-row,
+  .dashboard-incident-list > .incident-list-row {
+    grid-template-columns:
+      minmax(78px, .62fr)
+      minmax(185px, 1.52fr)
+      minmax(115px, .90fr)
+      minmax(125px, .94fr)
+      minmax(88px, .66fr)
+      minmax(55px, .35fr) !important;
+  }
+
+  .sira-incident-table-head span:nth-child(4),
+  .sira-incident-table-head span:nth-child(5),
+  .incident-grid .incident-list-location,
+  .incident-grid .incident-list-date,
+  .dashboard-incident-list .incident-list-location,
+  .dashboard-incident-list .incident-list-date {
+    display: initial !important;
+  }
+
+  .incident-grid .incident-list-location,
+  .incident-grid .incident-list-date,
+  .dashboard-incident-list .incident-list-location,
+  .dashboard-incident-list .incident-list-date {
+    display: grid !important;
+  }
+}
+
+@media (max-width: 820px) {
   .sira-incident-table-head,
   .incident-grid > .incident-list-row,
   .dashboard-incident-list > .incident-list-row {
     grid-template-columns:
       minmax(76px, .62fr)
-      minmax(180px, 1.58fr)
-      minmax(108px, .88fr)
-      minmax(112px, .92fr)
-      minmax(78px, .62fr)
-      minmax(56px, .40fr) !important;
+      minmax(170px, 1.52fr)
+      minmax(110px, .9fr)
+      minmax(115px, .92fr)
+      minmax(54px, .34fr) !important;
   }
 
-  .sira-incident-table-head > span:nth-child(5),
-  .incident-grid > .incident-list-row > .incident-list-date,
-  .dashboard-incident-list > .incident-list-row > .incident-list-date {
-    display: initial !important;
-  }
-
-  .incident-grid > .incident-list-row > .incident-list-date,
-  .dashboard-incident-list > .incident-list-row > .incident-list-date {
-    display: block !important;
+  .sira-incident-table-head span:nth-child(5),
+  .incident-grid .incident-list-date,
+  .dashboard-incident-list .incident-list-date {
+    display: none !important;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 680px) {
+  .sira-incident-table-head,
+  .incident-grid > .incident-list-row,
+  .dashboard-incident-list > .incident-list-row {
+    grid-template-columns:
+      minmax(72px, .62fr)
+      minmax(165px, 1.58fr)
+      minmax(105px, .9fr)
+      minmax(52px, .34fr) !important;
+  }
+
+  .sira-incident-table-head span:nth-child(4),
+  .incident-grid .incident-list-location,
+  .dashboard-incident-list .incident-list-location {
+    display: none !important;
+  }
+}
+
+@media (max-width: 520px) {
   .sira-incident-table-head,
   .incident-grid > .incident-list-row,
   .dashboard-incident-list > .incident-list-row {
     grid-template-columns:
       minmax(70px, .62fr)
-      minmax(150px, 1.62fr)
-      minmax(95px, .86fr)
-      minmax(52px, .40fr) !important;
+      minmax(0, 1.7fr)
+      minmax(50px, .34fr) !important;
   }
 
-  .sira-incident-table-head > span:nth-child(4),
-  .sira-incident-table-head > span:nth-child(5),
-  .incident-grid > .incident-list-row > .incident-list-location,
-  .incident-grid > .incident-list-row > .incident-list-date,
-  .dashboard-incident-list > .incident-list-row > .incident-list-location,
-  .dashboard-incident-list > .incident-list-row > .incident-list-date {
+  .sira-incident-table-head span:nth-child(3),
+  .incident-grid .incident-list-workflow,
+  .dashboard-incident-list .incident-list-workflow {
     display: none !important;
+  }
+
+  .incident-grid > .incident-list-row,
+  .dashboard-incident-list > .incident-list-row {
+    min-height: 62px !important;
+    padding: 8px 10px !important;
   }
 }
 
-/* SIRA INCIDENT TABLE LAYOUT RESET END */
+/* SIRA COMPACT INCIDENT TABLE PATCH END */
+
+/* SIRA INCIDENT TABLE HEADER REPAIR V2 START */
+
+.incident-grid,
+.dashboard-incident-list {
+  border: 1px solid #d7e3ef !important;
+  border-radius: 13px !important;
+}
+
+.incident-grid > .sira-incident-table-head,
+.dashboard-incident-list > .sira-incident-table-head {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+
+  width: 100%;
+
+  border: 0 !important;
+  border-bottom: 1px solid #dfe8f1 !important;
+  border-radius: 0 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(250, 253, 255, .995),
+      rgba(246, 250, 254, .995)
+    ) !important;
+
+  box-shadow:
+    0 3px 8px rgba(30, 65, 108, .035);
+}
+
+/* SIRA INCIDENT TABLE HEADER REPAIR V2 END */
 

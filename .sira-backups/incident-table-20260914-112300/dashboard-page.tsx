@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -607,14 +607,6 @@ export default function Dashboard() {
             </div>
           ) : filtered.length ? (
             <div className="incident-grid dashboard-incident-list">
-            <div className="sira-incident-table-head" aria-hidden="true">
-              <span>Severity / Status</span>
-              <span>Incident / ID</span>
-              <span>Workflow</span>
-              <span>Location</span>
-              <span>Reported</span>
-              <span>Action</span>
-            </div>
 
               {filtered.map((incident) => (
                 <IncidentRow
@@ -764,5 +756,3 @@ export default function Dashboard() {
     </>
   );
 }
-
-

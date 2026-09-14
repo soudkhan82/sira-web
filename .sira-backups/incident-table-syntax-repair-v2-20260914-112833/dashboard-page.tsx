@@ -606,7 +606,6 @@ export default function Dashboard() {
               Loading incidents...
             </div>
           ) : filtered.length ? (
-            <div className="incident-grid dashboard-incident-list">
             <div className="sira-incident-table-head" aria-hidden="true">
               <span>Severity / Status</span>
               <span>Incident / ID</span>
@@ -615,6 +614,7 @@ export default function Dashboard() {
               <span>Reported</span>
               <span>Action</span>
             </div>
+            <div className="incident-grid dashboard-incident-list">
 
               {filtered.map((incident) => (
                 <IncidentRow
@@ -764,5 +764,4 @@ export default function Dashboard() {
     </>
   );
 }
-
 

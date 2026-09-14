@@ -284,7 +284,6 @@ export default function Incidents() {
           {loading ? (
             <div className="card empty">Loading incidents...</div>
           ) : filtered.length ? (
-            <div className="incident-grid">
             <div className="sira-incident-table-head" aria-hidden="true">
               <span>Severity / Status</span>
               <span>Incident / ID</span>
@@ -293,6 +292,7 @@ export default function Incidents() {
               <span>Reported</span>
               <span>Action</span>
             </div>
+            <div className="incident-grid">
               {filtered.map((incident) => (
                 <IncidentRow
                   key={incident.id}
@@ -377,7 +377,6 @@ export default function Incidents() {
     </>
   );
 }
-
 
 
 

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { KeyboardEvent } from "react";
 import type { SiraIncident } from "@/types/incident";
 import {
@@ -51,17 +51,17 @@ export default function IncidentRow({
         onClick={onSelect}
         onKeyDown={handleKeyDown}
       >
-        <div className="incident-list-badges incident-list-status">
-          <span className={`badge ${i.severity}`}>
-            {String(i.severity).toUpperCase()}
-          </span>
-
-          <span className={`badge ${i.status}`}>
-            {getShortStatusLabel(i.status)}
-          </span>
-        </div>
-
         <div className="incident-list-primary">
+          <div className="incident-list-badges">
+            <span className={`badge ${i.severity}`}>
+              {String(i.severity).toUpperCase()}
+            </span>
+
+            <span className={`badge ${i.status}`}>
+              {getShortStatusLabel(i.status)}
+            </span>
+          </div>
+
           <div className="incident-list-title">
             <h3 title={i.title}>{i.title}</h3>
             <span className="incident-code">{code}</span>
@@ -134,4 +134,3 @@ export default function IncidentRow({
     </Link>
   );
 }
-
